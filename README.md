@@ -93,7 +93,7 @@ jshell> 12+3+"test"
 $2 ==> "15test"`
 ```
 
-##### 文字列の掛け算や引き算？
+##### 文字列の掛け算(繰り返し)や引き算
 ###### repeatメソッド
 - 文字列を繰り返す。<br>
 ```
@@ -116,9 +116,32 @@ $11 ==> "testtesttesttest"
 ```
 String String.formatted(Object...)
 ```
-- 書式指定子：書式指定子の部分が、formattedメソッドに渡した引数の値で置き換えられる。　例）%s<br>
+- 書式指定子：書式指定子の部分が、formattedメソッドに渡した引数の値で置き換えられる。
+　文字列に置き換えたい場所：%s <br>
+　値に置き換えたい場所：%d <br>
 - 書式指定子に対して引数が足りないとき：例外 MissingFormatArgumentExceptionが発生する。<br>
 - 書式指定子に対して引数が多いとき：あふれた引数は無視され、エラーも例外も示されない。<br>
+例<br>
+```
+jshell> "test%s".formatted(12+3)
+$3 ==> "test15"
+
+jshell> "%sと%s".formatted("test","sample")
+$4 ==> "testとsample"
+
+jshell> "%d+%d=%d".formatted(2,3,2+3)
+$5 ==> "2+3=5"
+
+jshell> "%s、%sおよび%s".formatted("test","sample")
+|  例外java.util.MissingFormatArgumentException: Format specifier '%s'
+|        at Formatter.format (Formatter.java:2768)
+|        at Formatter.format (Formatter.java:2705)
+|        at String.formatted (String.java:4200)
+|        at (#6:1)
+
+jshell> "%sならびに%s".formatted("test","sample","trial")
+$7 ==> "testならびにsample"
+```
 
 ###### その他の文字列に関するメソッド
 練習問題から<br>

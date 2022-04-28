@@ -230,18 +230,97 @@ varが導入される前は、変数の宣言のときに型を指定する必�
 型の代わりにvarを使うときは右側の値から推論して変数の型が決められる（型推論という）。<br>
 練習
 ```
+jshell> int c
+c ==> 0
+
+jshell> c = 5
+c ==> 5
+
+jshell> String u
+u ==> null
+
+jshell> u = "UFO"
+u ==> "UFO"
+
+jshell> int w
+w ==> 0
+
+jshell> w = "watch"
+|  エラー:
+|  不適合な型: java.lang.Stringをintに変換できません:
+|  w = "watch"
+|      ^-----^
+
+jshell> String w
+w ==> null
+
+jshell> w = "watch"
+w ==> "watch"
+
+jshell>  int d
+d ==> 0
+
+jshell> d = 12
+d ==> 12
+
+jshell> String d
+d ==> null
+
+jshell> d = 12
+|  エラー:
+|  不適合な型: intをjava.lang.Stringに変換できません:
 ```
 ##### 文字を扱う型char
+charは文字列の中の文字を扱う型。
+Stringは文字列を扱う型。char型の値をまとめて扱う型とも言える。
+char型は0から65535までの整数を扱う型。それぞれの数値に文字が割り当てられている。
 ##### 数値の型変換
 ###### 整数←→実数
+整数（int）と実数（doubule）を下記のように変換することができる。<br>
+ただし、実数から整数に変換されるときは小数点以下を切り捨てることになる。このとき失われた値は、整数から実数に戻しても回復されない。<br>
+```
+jshell> int i = 234
+i ==> 234
+
+jshell> double d = i
+d ==> 234.0
+
+jshell> double d = 3.14
+d ==> 3.14
+
+jshell> int i = (int)d
+i ==> 3
+
+jshell> double e = i
+e ==> 3.0
+```
 ###### 文字列←→数値
+- 文字列を整数に変換するとき、Integer.parseIntメソッドを使う。ただし、数値とみなせる文字列しか変換できない。<br>
+- 文字列を実数に変換するとき、Double.parseDoubleメソッドを使う。<br>
+- 数値から文字列に変換するとき、複数の方法がある。<br>
+	- +演算子を用いて、空文字と結合する。（Java9以降ではこれで実用上問題ない）<br>
+	```
+	jshell> String s = 123 + ""
+	s ==> "123"
+	```
+	- String.valueOfメソッドを使う。（Java8以前、または実行速度に厳しい場合）<br>
+	```
+	jshell> s = String.valueOf(123)
+	s ==> "123"
+	```
+	- formattedメソッドを使う。（カンマ区切りの文字列にしたいとき）<br>
+	```
+	jshell> s = "%,d".formatted(12345)
+	s ==> "12,345"
+	```
+	- NumberFormatクラスを使う。（変換する量が多く実行速度が気になるとき）<br>
+	```
+	jshell> java.text.NumberFormat.getInstance().format(12345)
+	$38 ==> "12,345"
+	```
 ##### 型の役割
-4.2.1	変数の型
-4.2.2	基本型と参照型
-4.2.3	変数の型を指定する
-4.2.4	文字を扱う型
-4.2.5	数値の型変換
-4.2.6	型の役割
+複数人でプログラムを構築・運用・改良していくときに、型を明示しておくと便利。<br>
+また、IntelliJ IDEAの補完機能を利用して効率的にソースコードを書いていくことも、型を明示しておくことによって、できるようになる。<br>
 
 ### 第5章 標準API
 5.1	日付時刻

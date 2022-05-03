@@ -493,17 +493,28 @@ $96 ==> 1.99999999999999999999522356663907438144
 
 ### 第6章 SwingによるGUI
 - Swingとは、ウィンドウを出すためのライブラリ。<br>
-	_ライブラリはライブラリとは、APIをまとめたもの。APIとは、他から呼び出せるようにしたプログラム。_<br>
-	_APIは「パッケージ」「クラス」「メソッド」の順に書く。APIを他から呼び出すときは、`import`とパッケージ名を書く。_<br>
-	- パッケージ：`javax.swing`<br>
-	- クラス<br>
-		`JFrame`<br
-		メソッド<br>
-			`setVisible`<br>
-			`setSize`<br>
-			`setLocation`<br>
-			`getLocation`<br>
-		`JTextField`<br>
+	> ライブラリはライブラリとは、APIをまとめたもの。APIとは、他から呼び出せるようにしたプログラム。<br>
+	> APIは「パッケージ」「クラス」「メソッド」の順に書く。<br>
+	> APIを他から呼び出すときは、`import`とパッケージ名を書く。importしたら「パッケージ」の記述を省略できる。<br>
+#### ウィンドウを表示してみる　`JFrame`クラス
+```
+jshell> import javax.swing.*
+
+jshell> var f = new JFrame("test")
+f ==> javax.swing.JFrame[frame0,0,0,0x0,invalid,hidden, ... tPaneCheckingEnabled=true]
+
+jshell> f.setVisible(true)
+
+jshell> f.setSize(600,400)
+
+jshell> f.setLocation(200,200)
+
+jshell> f.getLocation()
+$6 ==> java.awt.Point[x=200,y=200]
+```
+> - `javax.swing`パッケージをimportした。このパッケージのクラスのひとつである`JFrame`クラスとそのメソッドを使ってウィンドウを表示する。<br>
+> - `JFrame`クラスからnewを用いてオブジェクトを作成する。引数（ウィンドウのタイトルになる）を文字列"test"とし、変数fに代入した。<br>
+> - このfに`値.メソッド(引数)`（インスタンスメソッド）の形でウィンドウの表示／非表示を設定するメソッド`setVisible`、ウィンドウのサイズを設定するメソッド`setSize`、ウィンドウの大きさを設定するメソッド`setSize`、ウィンドウの表示位置を設定するメソッド`setLocation`、ウィンドウの表示位置を取得するメソッド`getLocation`を用いた。<br>
 6.1	Swingでのウィンドウ表示
 6.1.1	Swing
 6.1.2	ウィンドウを表示してみる

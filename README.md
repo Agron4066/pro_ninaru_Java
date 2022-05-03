@@ -493,17 +493,17 @@ $96 ==> 1.99999999999999999999522356663907438144
 
 ### 第6章 SwingによるGUI
 - Swingとは、ウィンドウを出すためのライブラリ。<br>
-	_ライブラリはライブラリとは、APIをまとめたもの。APIとは、他から呼び出せるようにしたプログラム。_
-	_APIは「パッケージ」「クラス」「メソッド」の順に書く。APIを他から呼び出すときは、`import`とパッケージ名を書く。_
+	_ライブラリはライブラリとは、APIをまとめたもの。APIとは、他から呼び出せるようにしたプログラム。_<br>
+	_APIは「パッケージ」「クラス」「メソッド」の順に書く。APIを他から呼び出すときは、`import`とパッケージ名を書く。_<br>
 	- パッケージ：`javax.swing`<br>
-	- クラス
-		`JFrame`
-		メソッド
-			`setVisible`
-			`setSize`
-			`setLocation`
-			`getLocation`
-		`JTextField`
+	- クラス<br>
+		`JFrame`<br
+		メソッド<br>
+			`setVisible`<br>
+			`setSize`<br>
+			`setLocation`<br>
+			`getLocation`<br>
+		`JTextField`<br>
 6.1	Swingでのウィンドウ表示
 6.1.1	Swing
 6.1.2	ウィンドウを表示してみる

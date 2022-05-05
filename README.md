@@ -493,10 +493,10 @@ $96 ==> 1.99999999999999999999522356663907438144
 
 ### 第6章 SwingによるGUI
 - Swingとは、ウィンドウを出すためのライブラリ。<br>
-	> ライブラリはライブラリとは、APIをまとめたもの。APIとは、他から呼び出せるようにしたプログラム。<br>
+	> ライブラリとは、APIをまとめたもの。APIとは、他から呼び出せるようにしたプログラム。<br>
 	> APIは「パッケージ」「クラス」「メソッド」の順に書く。<br>
 	> APIを他から呼び出すときは、`import`とパッケージ名を書く。importしたら「パッケージ」の記述を省略できる。<br>
-#### ウィンドウを表示してみる　`JFrame`クラス
+#### ウィンドウを表示する。　`JFrame`クラス
 ```
 jshell> import javax.swing.*
 
@@ -513,16 +513,71 @@ jshell> f.getLocation()
 $6 ==> java.awt.Point[x=200,y=200]
 ```
 > - `javax.swing`パッケージをimportした。このパッケージのクラスのひとつである`JFrame`クラスとそのメソッドを使ってウィンドウを表示する。<br>
-> - `JFrame`クラスからnewを用いてオブジェクトを作成する。引数（ウィンドウのタイトルになる）を文字列"test"とし、変数fに代入した。<br>
-> - このfに`値.メソッド(引数)`（インスタンスメソッド）の形でウィンドウの表示／非表示を設定するメソッド`setVisible`、ウィンドウのサイズを設定するメソッド`setSize`、ウィンドウの大きさを設定するメソッド`setSize`、ウィンドウの表示位置を設定するメソッド`setLocation`、ウィンドウの表示位置を取得するメソッド`getLocation`を用いた。<br>
+> - `JFrame`クラスからnewを用いてオブジェクトを作成する。引数（ウィンドウのタイトルになる）を文字列"test"とし、変数fに割り当てた。<br>
+> - この変数fに`値.メソッド(引数)`（インスタンスメソッド）の形でウィンドウの表示／非表示を設定するメソッド`setVisible`、ウィンドウのサイズを設定するメソッド`setSize`、ウィンドウの大きさを設定するメソッド`setSize`、ウィンドウの表示位置を設定するメソッド`setLocation`、ウィンドウの表示位置を取得するメソッド`getLocation`を用いた。<br>
 
-6.1	Swingでのウィンドウ表示
-6.1.1	Swing
-6.1.2	ウィンドウを表示してみる
-6.1.3	入力領域の配置
-6.1.4	2つ目の入力領域
-6.1.5	ボタンを配置
-6.1.6	クラスとオブジェクト、インスタンス
+#### 入力領域を配置する。　`JText.Field`クラス
+```
+jshell> var t = new JTextField()
+t ==> javax.swing.JTextField[,0,0,0x0,invalid,layout=ja ... rizontalAlignment=LEADING]
+
+jshell> f.add("North",t)
+$6 ==> javax.swing.JTextField[,0,0,0x0,invalid,layout=javax.swing.plaf.basic.BasicTextUI$UpdateHandler,alignmentX=0.0,alignmentY=0.0,border=javax.swing.plaf.BorderUIResource$CompoundBorderUIResource@3d921e20,flags=296,maximumSize=,minimumSize=,preferredSize=,caretColor=sun.swing.PrintColorUIResource[r=51,g=51,b=51],disabledTextColor=javax.swing.plaf.ColorUIResource[r=184,g=207,b=229],editable=true,margin=javax.swing.plaf.InsetsUIResource[top=0,left=0,bottom=0,right=0],selectedTextColor=sun.swing.PrintColorUIResource[r=51,g=51,b=51],selectionColor=javax.swing.plaf.ColorUIResource[r=184,g=207,b=229],columns=0,columnWidth=0,command=,horizontalAlignment=LEADING]
+
+jshell> t.setText("Hello")
+
+jshell> t.getText()
+$8 ==> "Hello"
+
+jshell> var t2 = new JTextField("second")
+t2 ==> javax.swing.JTextField[,0,0,0x0,invalid,layout=ja ... rizontalAlignment=LEADING]
+
+jshell> f.add("South",t2)
+$10 ==> javax.swing.JTextField[,0,0,0x0,invalid,layout=javax.swing.plaf.basic.BasicTextUI$UpdateHandler,alignmentX=0.0,alignmentY=0.0,border=javax.swing.plaf.BorderUIResource$CompoundBorderUIResource@3d921e20,flags=296,maximumSize=,minimumSize=,preferredSize=,caretColor=sun.swing.PrintColorUIResource[r=51,g=51,b=51],disabledTextColor=javax.swing.plaf.ColorUIResource[r=184,g=207,b=229],editable=true,margin=javax.swing.plaf.InsetsUIResource[top=0,left=0,bottom=0,right=0],selectedTextColor=sun.swing.PrintColorUIResource[r=51,g=51,b=51],selectionColor=javax.swing.plaf.ColorUIResource[r=184,g=207,b=229],columns=0,columnWidth=0,command=,horizontalAlignment=LEADING]
+
+jshell> f.validate()
+
+
+jshell> t.setText(t2.getText())
+
+jshell> t.setText(t2.getText().toUpperCase())
+
+// 練習
+jshell> t2.setText(t.getText())
+
+jshell> t2.setText(t.getText().toLowerCase())
+```
+> - 「ウィンドウを表示する。」から`javax.swing`パッケージや変数fを引き継いでいる。<br>
+> - `javax.swing`パッケージのクラスのひとつである`JTextField`クラスとそのメソッドを使ってウィンドウに入力領域を配置する。<br>
+> - `JTextField`クラスからnewを用いてオブジェクトを作成し、変数tに割り当てた。<br>
+> - この変数tに`値.メソッド(引数)`（インスタンスメソッド）の形で入力領域を追加するメソッド`add`、文字列を入力するメソッド`setText`、入力欄の文字列を取得するメソッド`getText`を用いた。<br>
+> - `値.メソッド(引数)`の引数に`値.メソッド(引数)`を記述したり、`値.メソッド(引数)`の後ろにメソッドを追加したりすることもできる。→`値.メソッド(値.メソッド().メソッド())`<br>
+
+#### ボタンを配置する。　`JButton`クラス
+- ラムダ式：「必要なときにこの処理を呼び出してください」という式。→詳細は第10章。
+```
+変数名 -> 処理
+```
+```
+jshell> var b = new JButton("Upper")
+b ==> javax.swing.JButton[,0,0,0x0,invalid,alignmentX=0 ... Upper,defaultCapable=true]
+
+jshell> f.add("Center",b)
+$17 ==> javax.swing.JButton[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.5,border=javax.swing.plaf.BorderUIResource$CompoundBorderUIResource@8e24743,flags=296,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,disabledSelectedIcon=,margin=javax.swing.plaf.InsetsUIResource[top=2,left=14,bottom=2,right=14],paintBorder=true,paintFocus=true,pressedIcon=,rolloverEnabled=true,rolloverIcon=,rolloverSelectedIcon=,selectedIcon=,text=Upper,defaultCapable=true]
+
+jshell> f.validate()
+
+jshell> b.addActionListner(ae -> t.setText(t2.getText().toUpperCase()))
+```
+> - 「ウィンドウを表示する。」から`javax.swing`パッケージや変数f、変数tを引き継いでいる。<br>
+> - `javax.swing`パッケージのクラスのひとつである`JButton`クラスとそのメソッドを使ってウィンドウに入力領域を配置する。<br>
+> - `JButton`クラスからnewを用いてオブジェクトを作成し、変数bに割り当てた。<br>
+> - この変数tに`値.メソッド(引数)`（インスタンスメソッド）の形で入力領域を追加するメソッド`add`、文字列を入力するメソッド`setText`、入力欄の文字列を取得するメソッド`getText`を用いた。<br>
+> - ラムダ式を用いてボタンの動作を登録した。<br>
+
+#### 参照型
+- 参照型とは、オブジェクトなどを置いた場所を示す値を保持する変数。<br>
+
 6.1.7	参照を扱う
 6.2	画面に絵を描いてみる
 6.2.1	ウィンドウの準備

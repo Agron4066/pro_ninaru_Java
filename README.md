@@ -547,7 +547,7 @@ jshell> t2.setText(t.getText())
 
 jshell> t2.setText(t.getText().toLowerCase())
 ```
-> - 「ウィンドウを表示する。」から`javax.swing`パッケージや変数fを引き継いでいる。<br>
+> - 前節から`javax.swing`パッケージや変数fを引き継いでいる。<br>
 > - `javax.swing`パッケージのクラスのひとつである`JTextField`クラスとそのメソッドを使ってウィンドウに入力領域を配置する。<br>
 > - `JTextField`クラスからnewを用いてオブジェクトを作成し、変数tに割り当てた。<br>
 > - この変数tに`値.メソッド(引数)`（インスタンスメソッド）の形で入力領域を追加するメソッド`add`、文字列を入力するメソッド`setText`、入力欄の文字列を取得するメソッド`getText`を用いた。<br>
@@ -569,7 +569,7 @@ jshell> f.validate()
 
 jshell> b.addActionListner(ae -> t.setText(t2.getText().toUpperCase()))
 ```
-> - 「ウィンドウを表示する。」から`javax.swing`パッケージや変数f、変数tを引き継いでいる。<br>
+> - 前節までから`javax.swing`パッケージや変数f、変数tを引き継いでいる。<br>
 > - `javax.swing`パッケージのクラスのひとつである`JButton`クラスとそのメソッドを使ってウィンドウに入力領域を配置する。<br>
 > - `JButton`クラスからnewを用いてオブジェクトを作成し、変数bに割り当てた。<br>
 > - この変数tに`値.メソッド(引数)`（インスタンスメソッド）の形で入力領域を追加するメソッド`add`、文字列を入力するメソッド`setText`、入力欄の文字列を取得するメソッド`getText`を用いた。<br>
@@ -578,11 +578,38 @@ jshell> b.addActionListner(ae -> t.setText(t2.getText().toUpperCase()))
 #### 参照型
 - 参照型とは、オブジェクトなどを置いた場所を示す値を保持する変数。<br>
 
-6.1.7	参照を扱う
-6.2	画面に絵を描いてみる
-6.2.1	ウィンドウの準備
-6.2.2	画像の準備
-6.2.3	図形の描画
+#### 画面に絵を描いてみる。　
+```
+jshell> import javax.swing.*
+
+jshell> var f = new JFrame("drawing")
+f ==> javax.swing.JFrame[frame0,0,0,0x0,invalid,hidden, ... tPaneCheckingEnabled=true]
+
+jshell> f.setVisible(true)
+
+jshell> var label = new JLabel("test")
+label ==> javax.swing.JLabel[,0,0,0x0,invalid,alignmentX=0. ... rticalTextPosition=CENTER]
+
+jshell> f.add(label)
+$5 ==> javax.swing.JLabel[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=,flags=8388608,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=LEADING,horizontalTextPosition=TRAILING,iconTextGap=4,labelFor=,text=test,verticalAlignment=CENTER,verticalTextPosition=CENTER]
+
+jshell> f.pack()
+
+jshell> import java.awt.image.BufferedImage
+
+jshell> var image = new BufferedImage(600,400,BufferedImage.TYPE_INT_RGB)
+image ==> BufferedImage@1dfe2924: type = 1 DirectColorModel ... 0 yOff = 0 dataOffset[0] 0
+
+jshell> label.setIcon(new ImageIcon(image))
+
+jshell> f.pack()
+```
+- 前節までと同じく、`javax.swing`パッケージの`JFrame`クラスを`new`して変数fに代入し、`setVisible`メソッドの引数に`true`を渡してウィンドウを表示させた。<br>
+- 文字列や画像を表示する`JLabel`クラスから作成して変数labelに代入したオブジェクトを引数にして、上記変数fに対して`add`メソッドを呼び出した。→JLabelオブジェクトをウィンドウに配置した。中略。<br>
+- 描画処理のための`java.awt.image`パッケージの`BufferedImage`クラスからコンストラクタに画像の幅、高さ、種類（色の扱い）を指定して作成したオブジェクトを変数imageに代入した。<br>
+- 画像をアイコンとして扱うための`ImageIcon`クラスから変数imageを引数にして作成したオブジェクトを、さらに引数にして、画像を設定するための`setIcon`メソッドを変数labelに対して呼び出した。すると、ラベル部分が黒くなった。<br>
+- 変数fに対して`pack`メソッドを呼び出すと、ウィンドウが画像のサイズに合わせて大きくなった。<br>
+
 6.3	Javaの基本文法
 6.3.1	Javaの文法
 6.3.2	入力エラーの対処

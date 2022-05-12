@@ -610,7 +610,77 @@ jshell> f.pack()
 - 画像をアイコンとして扱うための`ImageIcon`クラスから変数imageを引数にして作成したオブジェクトを、さらに引数にして、画像を設定するための`setIcon`メソッドを変数labelに対して呼び出した。すると、ラベル部分が黒くなった。<br>
 - 変数fに対して`pack`メソッドを呼び出すと、ウィンドウが画像のサイズに合わせて大きくなった。<br>
 
-6.3	Javaの基本文法
+#### Javaの基本文法
+上記ウィンドウ表示～ボタン配置までを1つのプログラムにまとめると下記の通り。<br>
+```
+package projava;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JTextField;
+import java.awt.*;
+import java.util.Locale;
+
+public class SampleForm {
+
+
+    public static void main(String[] args) {
+        var frame = new JFrame("test");
+        frame.setSize(600,400);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        var text1 = new JTextField();
+        frame.add("North",text1);
+
+        var text2 = new JTextField();
+        frame.add("South",text2);
+
+        var button = new JButton("大文字");
+        frame.add("Center",button);
+
+        button.addActionListener(ae ->
+                text2.setText(text1.getText().toUpperCase()));
+
+        frame.setVisible(true);
+    }
+}
+```
+> `package projava;`　Javaのプログラムは左記のようなパッケージの宣言から始まる。<br>
+> `public class SampleForm {`　ここからがJavaのプログラムの本体になる。Javaのプログラムはclassかそれに相当するもので囲まれる。<br>
+> `public static void main( String[] args) {`　Javaのプログラムはmainメソッドから始まる。<br>
+> `frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);`　ウィンドウが閉じたときにプログラムを終わらせるためのコード。<br>
+- コーディング規約　行を途中で改行する場合にはインデント2つ分の字下げを行う。<br>
+- 命名規則<br>
+	- クラス：アッパーキャメルケース<br>
+	- メソッド：ローワーキャメルケース<br>
+	- 変数：ローワーキャメルケース<br>
+	- 定数：全て大文字。単語と単語はアンダースコアで区切る。<br>
+	- パッケージ：小文字<br>
+練習<br>
+```
+package projava;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+
+public class iconDrawing {
+    public static void main(String[] args) {
+        var frame = new JFrame("drawing");
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        var label = new JLabel("text");
+        frame.add("North",label);
+
+        var image = new BufferedImage(600,400,BufferedImage.TYPE_INT_RGB);
+        label.setIcon(new ImageIcon(image));
+
+        frame.pack();
+    }
+}
+```
+
 6.3.1	Javaの文法
 6.3.2	入力エラーの対処
 6.3.3	IntelliJ IDEAを使わずに実行する

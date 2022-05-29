@@ -687,21 +687,173 @@ public class iconDrawing {
 
 ## 第3部 Javaの文法
 ### 第7章 条件分岐
-7.1	論理型
-7.1.1	値の比較
-7.1.2	オブジェクトの大小比較
-7.1.3	オブジェクトが等しいかどうかの比較
-7.1.4	論理演算子
-7.1.5	条件演算子
-7.2	if文による条件分岐
-7.2.1	if文
-7.2.2	else句
-7.2.3	elseif
-7.3	switchによる条件分岐
-7.3.1	switch文
-7.3.2	default句
-7.3.3	switch式
-7.3.4	古い形式のswitch
+#### 論理型
+- containsメソッド　`"String1".contains("String2")` 文字列1に文字列2が含まれるかを判定し、真偽値を返す。<br>
+練習<br>
+```
+jshell> "test".contains("st")
+$1 ==> true
+```
+- 比較演算子　==、!=、<、<=、>=、><br>
+- 
+練習<br>
+```
+jshell> 12 < 35
+$2 ==> true
+
+jshell> 12 <= 35
+$3 ==> true
+
+jshell> 12 == 35
+$4 ==> false
+
+jshell> 12 != 35
+$5 ==> true
+```
+- compareToメソッド　`A.compareTo(B)` オブジェクトAとBの大きさ（文字数、日付など）の大きさを比較する。戻り値についての説明は省く。<br>
+練習<br>
+```
+jshell> "test".compareTo("TEST")
+$6 ==> 32
+
+jshell> var today = LocalDate.now()
+|  エラー:
+|  シンボルを見つけられません
+|    シンボル:   変数 LocalDate
+|    場所: クラス
+|  var today = LocalDate.now();
+|              ^-------^
+
+jshell> import java.time.*
+
+jshell> var today = LocalDate.now()
+today ==> 2022-05-13
+
+jshell> var theDay1 = LocalDate.of(2022,3,15)
+theDay1 ==> 2022-03-15
+
+jshell> today.compareTo(theDay1)
+$11 ==> 2
+
+jshell> today.isBefore(theDay1)
+$12 ==> false
+```
+- equalsメソッド<br>
+	- `==`　「オブジェクトが」等しいかどうか、つまりオブジェクトの値と型が等しいかどうかを評価する演算子。<br>
+	- equalsメソッド　オブジェクトの値だけについて等しいかどうかを評価する演算子。<br>
+```
+jshell> "HELLO".equals("hello".toUpperCase())
+$19 ==> true
+
+jshell> var theDay1 = LocalDate.of(2021,9,24)
+theDay1 ==> 2021-09-24
+
+jshell> theDay1.equals(LocalDate.of(2021,9,14).plusDays(10))
+$21 ==> true
+```
+- 論理演算子<br>
+	- 論理和　`||`　「または」<br>
+	- 論理積　`&&`　「かつ」<br>
+	- 否定　`!`　条件をひっくり返す。<br>
+- 条件演算子　`条件 ? 条件がtrueのときの値 : 条件がfalseのときの値`<br>
+
+#### if文による条件分岐
+基本的にJavaScript等と同じ。<br>
+練習<br>
+```
+public class IfSample {
+    public static void main(String[] args) {
+        var a = 2;
+        if(a<3){
+            System.out.println("small");
+        }
+        var b = 3;
+        if(b<3){
+            System.out.println("small");
+        }
+    }
+}
+```
+```
+package projava;
+
+public class IfSample {
+    public static void main(String[] args) {
+        var a = 2;
+        if(a<3){
+            System.out.println("small");
+        }else{
+            System.out.println("big");
+        }
+        var b = 3;
+        if(b<3){
+            System.out.println("small");
+        }else{
+            System.out.println("big");
+        }
+    }
+}
+```
+```
+package projava;
+
+public class IfSample {
+    public static void main(String[] args) {
+        var a = 2;
+        if(a<3){
+            System.out.println("small");
+        }else if(a<7){
+            System.out.println("middle");
+        }else{
+            System.out.println("big");
+        }
+        var b = 3;
+        if(b<3){
+            System.out.println("small");
+        }else if(b<7){
+            System.out.println("middle");
+        }else{
+            System.out.println("big");
+        }
+        var c = 8;
+        if(c<3){
+            System.out.println("small");
+        }else if(c<7){
+            System.out.println("middle");
+        }else{
+            System.out.println("big");
+        }
+    }
+}
+```
+#### switchによる条件分岐
+- switch文<br>
+```
+switch(判定する値){
+	case 該当する値 -> 処理
+	case 該当する別の値 -> 処理
+	case 該当するさらに別の値 -> 処理
+	...
+	default -> どのcase句にも該当しなかったときの値
+}
+```
+練習<br>
+```
+package projava;
+
+public class IfSample {
+    public static void main(String[] args) {
+        var a = 2;
+        switch (a){
+            case 1,2 -> System.out.println("one-two");
+            case 3 -> System.out.println("three");
+            case 4 -> System.out.println("four");
+            case 5 -> System.out.println("five");
+			default -> System.out.println("over6");
+        }
+    }
+}
+```
 
 ### 第8章 データ構造
 8.1	Listで値をまとめる
